@@ -7,6 +7,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B868CE35-E92
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotasViagem.API", "src\RotasViagem.API\RotasViagem.API.csproj", "{B8242CDA-7399-4D55-8EA5-D9DC436D74D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotasViagem.Domain", "src\RotasViagem.Domain\RotasViagem.Domain.csproj", "{3DF2222C-A8B7-49B6-B309-87852461853C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotasViagem.Infra", "src\RotasViagem.Infra\RotasViagem.Infra.csproj", "{F8734922-448B-4349-BE72-74583581CD80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotasViagem.Services", "src\RotasViagem.Services\RotasViagem.Services.csproj", "{3EF880D6-A4A7-4B4C-BD3A-059D7777326B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +23,26 @@ Global
 		{B8242CDA-7399-4D55-8EA5-D9DC436D74D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8242CDA-7399-4D55-8EA5-D9DC436D74D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8242CDA-7399-4D55-8EA5-D9DC436D74D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DF2222C-A8B7-49B6-B309-87852461853C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DF2222C-A8B7-49B6-B309-87852461853C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DF2222C-A8B7-49B6-B309-87852461853C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DF2222C-A8B7-49B6-B309-87852461853C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8734922-448B-4349-BE72-74583581CD80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8734922-448B-4349-BE72-74583581CD80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8734922-448B-4349-BE72-74583581CD80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8734922-448B-4349-BE72-74583581CD80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EF880D6-A4A7-4B4C-BD3A-059D7777326B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EF880D6-A4A7-4B4C-BD3A-059D7777326B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EF880D6-A4A7-4B4C-BD3A-059D7777326B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EF880D6-A4A7-4B4C-BD3A-059D7777326B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B8242CDA-7399-4D55-8EA5-D9DC436D74D8} = {B868CE35-E929-4D90-B1CF-4C06A1F81695}
+		{3DF2222C-A8B7-49B6-B309-87852461853C} = {B868CE35-E929-4D90-B1CF-4C06A1F81695}
+		{F8734922-448B-4349-BE72-74583581CD80} = {B868CE35-E929-4D90-B1CF-4C06A1F81695}
+		{3EF880D6-A4A7-4B4C-BD3A-059D7777326B} = {B868CE35-E929-4D90-B1CF-4C06A1F81695}
 	EndGlobalSection
 EndGlobal
