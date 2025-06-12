@@ -4,11 +4,10 @@ using System.Collections;
 
 namespace RotasViagem.Domain.Validators;
 
-//internal class RotaViagemValidator : AbstractValidator<RotaViagem>
-public class RotaViagemValidator : AbstractValidator<RotaViagem>, IValidator<RotaViagem>, IValidator, IEnumerable<IValidationRule>, IEnumerable
+public class RotaValidator : AbstractValidator<Rota>
 {
 
-    public RotaViagemValidator()
+    public RotaValidator()
     {
         RuleFor(x => x.Origem)
             .NotEmpty()
