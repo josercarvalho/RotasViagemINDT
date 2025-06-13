@@ -31,9 +31,9 @@ public class BaseRepository<T> : IBaseRepository<T> where T : Base
         return obj;
     }
 
-    public virtual async Task RemoveAsync(long id)
+    public virtual async Task RemoveAsync(int id)
     {
-        var obj = await GetAsync(id);
+        var obj = await GetByIdAsync(id);
 
         if (obj != null)
         {
@@ -42,7 +42,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : Base
         }
     }
 
-    public virtual async Task<T> GetAsync(long id)
+    public virtual async Task<T> GetByIdAsync(int id)
     {
         var obj = await _context.Set<T>()
                                 .AsNoTracking()
