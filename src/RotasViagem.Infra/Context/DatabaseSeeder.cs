@@ -9,22 +9,22 @@ public static class DatabaseSeeder
     {
         if (context.Rotas.Any()) return;
 
-        var trecho = new List<Trecho>
+        var Rota = new List<Rota>
         {
-            new Trecho ( "GRU", "BRC", 10 ),
-            new Trecho ( "GRU", "SCL", 5  ),
-            new Trecho ( "GRU", "CDG", 75 ),
-            new Trecho ( "GRU", "SCL", 20 ),
-            new Trecho ( "GRU", "ORL", 56 ),
-            new Trecho ( "GRU", "CDG", 5  ),
-            new Trecho ( "GRU", "ORL", 20 ),
-            new Trecho ( "CDG", "ORL", 13 ),
-            new Trecho ( "CDG", "GRU", 11 ),
-            new Trecho ( "CDG", "SCL", 9  )
+            new Rota ( "GRU", "BRC", 10 ),
+            new Rota ( "GRU", "SCL", 5  ),
+            new Rota ( "GRU", "CDG", 75 ),
+            new Rota ( "GRU", "SCL", 20 ),
+            new Rota ( "GRU", "ORL", 56 ),
+            new Rota ( "GRU", "CDG", 5  ),
+            new Rota ( "GRU", "ORL", 20 ),
+            new Rota ( "CDG", "ORL", 13 ),
+            new Rota ( "CDG", "GRU", 11 ),
+            new Rota ( "CDG", "SCL", 9  )
         };
 
 
-        context.Rotas.AddRange((IEnumerable<Rota>)trecho);
+        context.Rotas.AddRange((IEnumerable<Rota>)Rota);
         context.SaveChanges();
     }
 }

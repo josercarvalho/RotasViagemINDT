@@ -6,22 +6,29 @@ namespace RotasViagem.Domain.Entities;
 public class Rota : Base
 {
 
+    /// <summary>
+    /// Código do aeroporto de origem (ex: GRU).
+    /// </summary>
     public string Origem { get; private set; }
-    public string Destino { get; private set; }
-    public decimal Valor { get; private set; }
-    public string Conexao { get; private set; }
 
-    public IEnumerable<Rota> Rotas { get; set; }
+    /// <summary>
+    /// Código do aeroporto de destino (ex: CDG).
+    /// </summary>
+    public string Destino { get; private set; }
+
+    /// <summary>
+    /// Valor (custo) da rota.
+    /// </summary>
+    public decimal Valor { get; set; }
 
 
     protected Rota() { }
 
-    public Rota( string conexao, string origem, string destino, decimal valor)
+    public Rota( string origem, string destino, decimal valor)
     {
         Origem = origem;
         Destino = destino;
         Valor = valor;
-        Conexao = conexao;
         _errors = new List<string>();
 
         Validate();

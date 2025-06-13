@@ -3,12 +3,19 @@ using Microsoft.OpenApi.Models;
 using RotasViagem.Domain.Entities;
 using RotasViagem.Domain.Validators;
 using RotasViagem.Infra.Context;
+using RotasViagem.Infra.Interfaces;
+using RotasViagem.Infra.Repositories;
+using RotasViagem.Services.Interfaces;
+using RotasViagem.Services.Mappings;
+using RotasViagem.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
+
+#region Swagger
 
 var contactUrl = builder.Configuration["Swagger:ContactUrl"];
 
@@ -29,10 +36,14 @@ builder.Services.AddSwaggerGen(c =>
 
 });
 
+#endregion
+
+#region Database
+
 builder.Services.AddScoped<RotaDbContext>();
 
+
 builder.Services.AddScoped<IValidator<Rota>, RotaValidator>();
-builder.Services.AddScoped<IValidator<Trecho>, TrechoValidator>();
 
 builder.Services.AddCors(options =>
 {
@@ -43,6 +54,22 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+
+#endregion
+
+#region Repositories
+
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped<IRotaRepository, RotaRepository>();
+
+#endregion
+
+#region Services    
+
+builder.Services.AddAutoMapper(typeof(RotaProfile));
+builder.Services.AddScoped(typeof(IRotaService), typeof(RotaService));
+
+#endregion
 
 var app = builder.Build();
 

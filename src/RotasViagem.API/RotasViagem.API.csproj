@@ -27,6 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RotasViagem.Domain\RotasViagem.Domain.csproj" />
     <ProjectReference Include="..\RotasViagem.Infra\RotasViagem.Infra.csproj" />
+    <ProjectReference Include="..\RotasViagem.Services\RotasViagem.Services.csproj" />
   </ItemGroup>
 
 </Project>

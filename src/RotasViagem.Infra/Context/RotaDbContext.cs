@@ -6,8 +6,7 @@ namespace RotasViagem.Infra.Context;
 
 public class RotaDbContext : DbContext
 {
-    public DbSet<Rota> Rotas { get; set; }
-    public DbSet<Trecho> Trechos { get; set; }
+    public DbSet<Rota> Rotas => Set<Rota>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -20,7 +19,6 @@ public class RotaDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Trecho>(new TrechoMap().Configure);
         modelBuilder.Entity<Rota>(new RotaMap().Configure);
     }
 }

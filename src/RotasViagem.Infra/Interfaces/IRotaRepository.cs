@@ -2,7 +2,7 @@
 
 namespace RotasViagem.Infra.Interfaces
 {
-    public interface ITrechoRepository : IBaseRepository<Trecho>
+    public interface IRotaRepository : IBaseRepository<Rota>
     {
     }
 }
