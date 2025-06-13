@@ -2,25 +2,26 @@
 using RotasViagem.Domain.Entities;
 using RotasViagem.Infra.Mappings;
 
-namespace RotasViagem.Infra.Context
+namespace RotasViagem.Infra.Context;
+
+public class RotaDbContext : DbContext
 {
-    public class RotaDbContext : DbContext
+    public DbSet<Rota> Rotas { get; set; }
+    public DbSet<Trecho> Trechos { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        public RotaDbContext(DbContextOptions<RotaDbContext> options) : base(options) { }
+        optionsBuilder.UseSqlite("Data Source=rotas.db");
 
-        public DbSet<Rota> Rotas => Set<Rota>();
-        public DbSet<User> Users => Set<User>();
-        public DbSet<Trecho> Trechos => Set<Trecho>();
+        base.OnConfiguring(optionsBuilder);
+    }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Trecho>(new TrechoMap().Configure);
-            modelBuilder.ApplyConfiguration(new RotaMap());
-            modelBuilder.ApplyConfiguration(new TrechoMap());
-            modelBuilder.ApplyConfiguration(new UserMap());
-        }
-
+        modelBuilder.Entity<Trecho>(new TrechoMap().Configure);
+        modelBuilder.Entity<Rota>(new RotaMap().Configure);
     }
 }
+

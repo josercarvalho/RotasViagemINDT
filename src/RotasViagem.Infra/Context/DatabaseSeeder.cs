@@ -1,4 +1,5 @@
 ﻿using RotasViagem.Domain.Entities;
+using System.Drawing;
 
 namespace RotasViagem.Infra.Context;
 
@@ -8,18 +9,22 @@ public static class DatabaseSeeder
     {
         if (context.Rotas.Any()) return;
 
-        var rotas = new List<Rota> { };
-    //{
-    //     new (Guid.NewGuid(),"GRU", "BRC", 10),
-    //    new (Guid.NewGuid(), "GRU", "CDG", 75),
-    //    new (Guid.NewGuid(), "GRU", "SCL", 20),
-    //    new (Guid.NewGuid(), "GRU", "ORL", 56),
-    //    new (Guid.NewGuid(), "ORL", "CDG", 5),
-    //    new (Guid.NewGuid(), "SCL", "ORL", 20),
-    //    new (Guid.NewGuid(), "BRC", "SCL", 5)
-    //};
+        var trecho = new List<Trecho>
+        {
+            new Trecho ( "GRU", "BRC", 10 ),
+            new Trecho ( "GRU", "SCL", 5  ),
+            new Trecho ( "GRU", "CDG", 75 ),
+            new Trecho ( "GRU", "SCL", 20 ),
+            new Trecho ( "GRU", "ORL", 56 ),
+            new Trecho ( "GRU", "CDG", 5  ),
+            new Trecho ( "GRU", "ORL", 20 ),
+            new Trecho ( "CDG", "ORL", 13 ),
+            new Trecho ( "CDG", "GRU", 11 ),
+            new Trecho ( "CDG", "SCL", 9  )
+        };
 
-        context.Rotas.AddRange(rotas);
+
+        context.Rotas.AddRange((IEnumerable<Rota>)trecho);
         context.SaveChanges();
     }
 }

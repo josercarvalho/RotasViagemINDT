@@ -1,5 +1,4 @@
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using RotasViagem.Domain.Entities;
 using RotasViagem.Domain.Validators;
@@ -30,9 +29,10 @@ builder.Services.AddSwaggerGen(c =>
 
 });
 
-builder.Services.AddDbContext<RotaDbContext>(opt => opt.UseInMemoryDatabase("RotasDB"));
+builder.Services.AddScoped<RotaDbContext>();
 
 builder.Services.AddScoped<IValidator<Rota>, RotaValidator>();
+builder.Services.AddScoped<IValidator<Trecho>, TrechoValidator>();
 
 builder.Services.AddCors(options =>
 {
@@ -45,6 +45,13 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<RotaDbContext>();
+    dbContext.Seed();
+}
+
 
 if (app.Environment.IsDevelopment())
 {
