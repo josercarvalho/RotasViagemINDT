@@ -12,11 +12,11 @@ public static class DatabaseSeeder
         var Rota = new List<Rota>
         {
             new Rota ( "GRU", "BRC", 10 ),
-            new Rota ( "GRU", "SCL", 5  ),
+            new Rota ( "BRC", "SCL", 5  ),
             new Rota ( "GRU", "CDG", 75 ),
             new Rota ( "GRU", "SCL", 20 ),
             new Rota ( "GRU", "ORL", 56 ),
-            new Rota ( "GRU", "CDG", 5  ),
+            new Rota ( "ORL", "CDG", 5  ),
             new Rota ( "GRU", "ORL", 20 ),
             new Rota ( "CDG", "ORL", 13 ),
             new Rota ( "CDG", "GRU", 11 ),

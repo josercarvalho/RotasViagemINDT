@@ -1,27 +1,29 @@
-﻿using AutoMapper;
+﻿using Microsoft.EntityFrameworkCore;
 using RotasViagem.Domain.Entities;
+using RotasViagem.Infra.Context;
 using RotasViagem.Infra.Interfaces;
 using RotasViagem.Services.Interfaces;
 
 namespace RotasViagem.Services.Services
 {
-    public class RotaService : IRotaService
+    public sealed class RotaService : IRotaService
     {
-        private readonly IMapper _mapper;
-        private readonly IRotaRepository _rota;
+        private readonly IRotaRepository _context;
 
-        public RotaService(IMapper mapper, IRotaRepository rota)
+        public RotaService(IRotaRepository context)
         {
-            _mapper = mapper;
-            _rota = rota;
+            _context = context;
         }
 
+        /// <summary>
+        /// Busca a melhor rota entre origem e destino com o menor custo total.
+        /// </summary>
         public async Task<(List<string> Caminho, decimal Custo)> BuscarMelhorRotaAsync(string origem, string destino)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(origem);
             ArgumentException.ThrowIfNullOrWhiteSpace(destino);
 
-            var rotas = await _rota.GetAllAsync();
+            var rotas = await _context.GetAllAsync();
             var resultado = Buscar(origem, destino, rotas, new List<string>(), 0);
             return resultado ?? (new List<string>(), decimal.MaxValue);
         }

@@ -24,7 +24,7 @@ public class Rota : Base
 
     protected Rota() { }
 
-    public Rota( string origem, string destino, decimal valor)
+    public Rota(string origem, string destino, decimal valor)
     {
         Origem = origem;
         Destino = destino;
@@ -34,20 +34,11 @@ public class Rota : Base
         Validate();
     }
 
-    public override bool Validate()
-    {
-        var validator = new RotaValidator();
-        var validation = validator.Validate(this);
+    public void SetOrigem(string origem) { Origem = origem; Validate(); }
 
-        if (!validation.IsValid)
-        {
-            foreach (var error in validation.Errors)
-                _errors.Add(error.ErrorMessage);
+    public void SetDestino(string destino) { Destino = destino; Validate(); }
 
-            throw new DomainException("Alguns campos estão inválidos, por favor corrija-os!", _errors);
-        }
-
-        return true;
-    }
+    public bool Validate()
+            => base.Validate(new RotaValidator(), this);
 
 }
