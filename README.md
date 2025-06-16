@@ -3,6 +3,7 @@
 ## Descrição
 
 Bem-vindo à documentação da API Rota. Esta API permite gerenciar e consultar rotas entre diferentes cidades. A seguir, estão os detalhes das operações disponíveis.
+Consta nesse projeto duas APIs, sendo uma Minimal API na camada de APLICATION e outra normal com Conttrolers na camada de API.
 
 ## Tecnologias Utilizadas
 
