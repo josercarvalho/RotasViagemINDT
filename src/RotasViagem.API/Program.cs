@@ -1,20 +1,20 @@
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using RotasViagem.Domain.Entities;
-using RotasViagem.Domain.Validators;
 using RotasViagem.Infra.Context;
 using RotasViagem.Infra.Interfaces;
 using RotasViagem.Infra.Repositories;
-using RotasViagem.Services.Interfaces;
+using RotasViagem.Services.DTOs;
 using RotasViagem.Services.Mappings;
-using RotasViagem.Services.Services;
+using RotasViagem.Services.Validator;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 #region Swagger
 
@@ -46,7 +46,7 @@ builder.Services.AddDbContext<RotaDbContext>(options =>
 
 builder.Services.AddScoped<RotaDbContext>();
 
-builder.Services.AddScoped<IValidator<Rota>, RotaValidator>();
+//builder.Services.AddScoped<IValidator<RotaResponse>, RotaValidator>();
 
 builder.Services.AddCors(options =>
 {

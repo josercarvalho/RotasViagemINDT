@@ -1,15 +1,14 @@
 ﻿using FluentValidation;
-using RotasViagem.Domain.Entities;
-using System.Collections;
+using RotasViagem.Services.DTOs;
 
-namespace RotasViagem.Domain.Validators;
+namespace RotasViagem.Services.Validator;
 
-public class RotaValidator : AbstractValidator<Rota>
+public class RotaValidator : AbstractValidator<RotaResponse>
 {
-
     public RotaValidator()
     {
         RuleFor(x => x.Origem)
+            .NotNull()
             .NotEmpty()
                 .WithMessage("O campo origem é obrigatório.");
 
@@ -18,7 +17,8 @@ public class RotaValidator : AbstractValidator<Rota>
                 .WithMessage("A origem deve conter no máxim 3 caracteres.");
 
         RuleFor(x => x.Destino)
-        .NotEmpty()
+            .NotNull()
+            .NotEmpty()
             .WithMessage("O campo destino é obrigatório.");
 
         RuleFor(x => x.Destino)
@@ -42,5 +42,4 @@ public class RotaValidator : AbstractValidator<Rota>
                 context.AddFailure("O valor deve ser maior que zero");
         });
     }
-
 }

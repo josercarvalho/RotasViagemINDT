@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using RotasViagem.Domain.Entities;
 using RotasViagem.Infra.Interfaces;
 using RotasViagem.Services.DTOs;
-using RotasViagem.Services.Interfaces;
 
 namespace RotasViagem.Aplication.Controllers;
 
@@ -14,7 +13,8 @@ public static class RotaController
 {
     public static void MapRotasEndpoints(this WebApplication app)
     {
-        app.MapGet("/api/rotas", async Task<Ok<List<RotaResponse>>> (IRotaRepository db, IMapper mapper) =>
+        app.MapGet("/api/rotas", async Task<Ok<List<RotaResponse>>> 
+            (IRotaRepository db, IMapper mapper) =>
         {
             var rotas = await db.GetAllAsync();
             var result = mapper.Map<List<RotaResponse>>(rotas);
@@ -24,7 +24,8 @@ public static class RotaController
         .WithDescription("Retorna a lista de todas as rotas cadastradas.")
         .WithTags("Rotas");
 
-        app.MapPost("/api/rotas", async Task<Created<RotaResponse>> (IRotaRepository db, IMapper mapper, RotaCreateRequest request) =>
+        app.MapPost("/api/rotas", async Task<Created<RotaResponse>> 
+            (IRotaRepository db, IMapper mapper, RotaCreateRequest request) =>
         {
             var rota = mapper.Map<Rota>(request);
             await db.CreateAsync(rota);
@@ -35,7 +36,8 @@ public static class RotaController
         .WithDescription("Cadastra uma nova rota com origem, destino e valor.")
         .WithTags("Rotas");
 
-        app.MapPut("/api/rotas/{id}", async Task<Results<NoContent, NotFound>> (int id, IRotaRepository db, RotaCreateRequest rotaAtualizada) =>
+        app.MapPut("/api/rotas/{id}", async Task<Results<NoContent, NotFound>> 
+            (int id, IRotaRepository db, RotaCreateRequest rotaAtualizada) =>
         {
             var rota = await db.GetByIdAsync(id);
             if (rota is null) return TypedResults.NotFound();
@@ -51,7 +53,8 @@ public static class RotaController
         .WithDescription("Atualiza os dados de uma rota existente pelo ID.")
         .WithTags("Rotas");
 
-        app.MapDelete("/api/rotas/{id}", async Task<Results<NoContent, NotFound>> (int id, IRotaRepository db) =>
+        app.MapDelete("/api/rotas/{id}", async Task<Results<NoContent, NotFound>> 
+            (int id, IRotaRepository db) =>
         {
             var rota = await db.GetByIdAsync(id);
             if (rota is null) return TypedResults.NotFound();
@@ -63,12 +66,12 @@ public static class RotaController
         .WithDescription("Remove uma rota do sistema pelo ID.")
         .WithTags("Rotas");
 
-        app.MapGet("/api/rotas/melhor", async Task<Results<Ok<string>, NotFound<string>, BadRequest<string>>> (string origem, string destino, IRotaRepository db) =>
+        app.MapGet("/api/rotas/melhor", async Task<Results<Ok<string>, NotFound<string>, BadRequest<string>>> 
+            (string origem, string destino, IRotaRepository db) =>
         {
             if (string.IsNullOrWhiteSpace(origem) || string.IsNullOrWhiteSpace(destino))
                 return TypedResults.BadRequest("Origem e destino são obrigatórios.");
 
-            //var service = new RotaService(db);
             var (caminho, custo) = await db.BuscarMelhorRotaAsync(origem.ToUpper(), destino.ToUpper());
 
             if (custo == decimal.MaxValue)

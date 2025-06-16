@@ -1,8 +1,18 @@
-﻿namespace RotasViagem.Services.DTOs;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RotasViagem.Services.DTOs;
 
 public class RotaCreateRequest
 {
-    public required string Origem { get; set; }
-    public required string Destino { get; set; }
-    public decimal Valor { get; set; } = 0;
+    [Required(ErrorMessage = "A origem é obrigatória")]
+    [StringLength(3, MinimumLength = 3, ErrorMessage = "A origem deve ter exatamente 3 caracteres")]
+    public string Origem { get; set; }
+
+    [Required(ErrorMessage = "O destino é obrigatório")]
+    [StringLength(3, MinimumLength = 3, ErrorMessage = "O destino deve ter exatamente 3 caracteres")]
+    public string Destino { get; set; }
+
+    [Required(ErrorMessage = "O valor é obrigatório")]
+    [Range(0.01, double.MaxValue, ErrorMessage = "O valor deve ser maior que zero")]
+    public decimal Valor { get; set; }
 }
