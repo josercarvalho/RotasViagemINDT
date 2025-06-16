@@ -63,13 +63,13 @@ public static class RotaController
         .WithDescription("Remove uma rota do sistema pelo ID.")
         .WithTags("Rotas");
 
-        app.MapGet("/api/rotas/melhor", async Task<Results<Ok<string>, NotFound<string>, BadRequest<string>>> (string origem, string destino, IRotaService service) =>
+        app.MapGet("/api/rotas/melhor", async Task<Results<Ok<string>, NotFound<string>, BadRequest<string>>> (string origem, string destino, IRotaRepository db) =>
         {
             if (string.IsNullOrWhiteSpace(origem) || string.IsNullOrWhiteSpace(destino))
                 return TypedResults.BadRequest("Origem e destino são obrigatórios.");
 
             //var service = new RotaService(db);
-            var (caminho, custo) = await service.BuscarMelhorRotaAsync(origem.ToUpper(), destino.ToUpper());
+            var (caminho, custo) = await db.BuscarMelhorRotaAsync(origem.ToUpper(), destino.ToUpper());
 
             if (custo == decimal.MaxValue)
                 return TypedResults.NotFound("Rota não encontrada");

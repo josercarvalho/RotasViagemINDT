@@ -1,4 +1,5 @@
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using RotasViagem.Domain.Entities;
 using RotasViagem.Domain.Validators;
@@ -40,8 +41,10 @@ builder.Services.AddSwaggerGen(c =>
 
 #region Database
 
-builder.Services.AddScoped<RotaDbContext>();
+builder.Services.AddDbContext<RotaDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddScoped<RotaDbContext>();
 
 builder.Services.AddScoped<IValidator<Rota>, RotaValidator>();
 
@@ -67,7 +70,7 @@ builder.Services.AddScoped<IRotaRepository, RotaRepository>();
 #region Services    
 
 builder.Services.AddAutoMapper(typeof(RotaProfile));
-builder.Services.AddScoped(typeof(IRotaService), typeof(RotaService));
+//builder.Services.AddScoped(typeof(IRotaService), typeof(RotaService));
 
 #endregion
 

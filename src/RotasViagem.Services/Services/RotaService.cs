@@ -1,54 +1,69 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RotasViagem.Domain.Entities;
-using RotasViagem.Infra.Context;
+﻿using RotasViagem.Domain.Entities;
 using RotasViagem.Infra.Interfaces;
-using RotasViagem.Services.Interfaces;
 
 namespace RotasViagem.Services.Services
 {
-    public sealed class RotaService : IRotaService
+    public class RotaService
     {
-        private readonly IRotaRepository _context;
+        private readonly ITesteRepository _rotaRepository;
 
-        public RotaService(IRotaRepository context)
+        public RotaService(ITesteRepository rotaRepository)
         {
-            _context = context;
+            _rotaRepository = rotaRepository;
         }
 
-        /// <summary>
-        /// Busca a melhor rota entre origem e destino com o menor custo total.
-        /// </summary>
-        public async Task<(List<string> Caminho, decimal Custo)> BuscarMelhorRotaAsync(string origem, string destino)
+        public string ConsultarMelhorRota(string origem, string destino)
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace(origem);
-            ArgumentException.ThrowIfNullOrWhiteSpace(destino);
+            var rotas = _rotaRepository.ObterRotas();
+            var melhoresRotas = new List<List<Rota>>();
 
-            var rotas = await _context.GetAllAsync();
-            var resultado = Buscar(origem, destino, rotas, new List<string>(), 0);
-            return resultado ?? (new List<string>(), decimal.MaxValue);
-        }
+            var caminhoAtual = new List<Rota>();
+            EncontrarRotas(origem, destino, rotas, caminhoAtual, melhoresRotas);
 
-        private (List<string>, decimal)? Buscar(string atual, string destino, List<Rota> rotas, List<string> visitados, decimal custoAtual)
-        {
-            if (visitados.Contains(atual)) return null;
+            if (melhoresRotas.Any())
+            {
+                var melhorRota = melhoresRotas
+                    .OrderBy(r => r.Sum(x => x.Valor))
+                    .FirstOrDefault();
 
-            visitados.Add(atual);
-            if (atual == destino) return (new List<string> { atual }, custoAtual);
+                string descricaoCaminho = string.Empty;
 
-            var melhores = rotas
-                .Where(r => r.Origem == atual)
-                .Select(r =>
+                if (melhorRota.Count > 1)
                 {
-                    var resultado = Buscar(r.Destino, destino, rotas, new List<string>(visitados), custoAtual + r.Valor);
-                    if (resultado != null)
-                        return (new List<string> { atual }.Concat(resultado.Value.Item1).ToList(), resultado.Value.Item2);
-                    return ((List<string>?)null, decimal.MaxValue);
-                })
-                .Where(r => r.Item1 != null)
-                .OrderBy(r => r.Item2)
-                .FirstOrDefault();
+                    descricaoCaminho = string.Join(" - ", melhorRota.Select(r => r.Origem)) + " - " + melhorRota.Select(l => l.Destino).Last() + " ao custo de $" + melhorRota.Sum(r => r.Valor);
+                }
+                else
+                {
+                    descricaoCaminho = melhorRota[0].Origem + "-" + melhorRota[0].Destino + " ao custo de $" + melhorRota.Sum(r => r.Valor);
+                }
 
-            return melhores.Item1 != null ? (melhores.Item1!, melhores.Item2) : null;
+                return descricaoCaminho;
+            }
+
+            return "Rota não encontrada!";
+        }
+
+        private void EncontrarRotas(string origem, string destino, List<Rota> rotas, List<Rota> caminhoAtual, List<List<Rota>> melhoresRotas)
+        {
+            if (origem == destino)
+            {
+                melhoresRotas.Add(new List<Rota>(caminhoAtual));
+                return;
+            }
+
+            var rotasDisponiveis = rotas.Where(r => r.Origem == origem).ToList();
+
+            foreach (var rota in rotasDisponiveis)
+            {
+                if (!caminhoAtual.Contains(rota))
+                {
+                    caminhoAtual.Add(rota);
+
+                    EncontrarRotas(rota.Destino, destino, rotas, caminhoAtual, melhoresRotas);
+
+                    caminhoAtual.RemoveAt(caminhoAtual.Count - 1);
+                }
+            }
         }
     }
 }

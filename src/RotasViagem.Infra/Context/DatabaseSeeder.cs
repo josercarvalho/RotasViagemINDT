@@ -17,7 +17,7 @@ public static class DatabaseSeeder
             new Rota ( "GRU", "SCL", 20 ),
             new Rota ( "GRU", "ORL", 56 ),
             new Rota ( "ORL", "CDG", 5  ),
-            new Rota ( "GRU", "ORL", 20 ),
+            new Rota ( "SCL", "ORL", 20 ),
             new Rota ( "CDG", "ORL", 13 ),
             new Rota ( "CDG", "GRU", 11 ),
             new Rota ( "CDG", "SCL", 9  )

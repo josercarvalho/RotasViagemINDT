@@ -11,39 +11,39 @@ public abstract class Base
     /// </summary>
     public int Id { get; init; }
 
-    internal List<string> _errors;
-    public IReadOnlyCollection<string> Errors => _errors;
+    //internal List<string> _errors;
+    //public IReadOnlyCollection<string> Errors => _errors;
 
-    public bool IsValid
-        => _errors.Count == 0;
+    //public bool IsValid
+    //    => _errors.Count == 0;
 
-    private void AddErrorList(IList<ValidationFailure> errors)
-    {
-        foreach (var error in errors)
-            _errors.Add(error.ErrorMessage);
-    }
+    //private void AddErrorList(IList<ValidationFailure> errors)
+    //{
+    //    foreach (var error in errors)
+    //        _errors.Add(error.ErrorMessage);
+    //}
 
-    private void CleanErrors()
-        => _errors.Clear();
+    //private void CleanErrors()
+    //    => _errors.Clear();
 
-    protected bool Validate<T, J>(T validator, J obj)
-        where T : AbstractValidator<J>
-    {
-        var validation = validator.Validate(obj);
+    //protected bool Validate<T, J>(T validator, J obj)
+    //    where T : AbstractValidator<J>
+    //{
+    //    var validation = validator.Validate(obj);
 
-        if (validation.Errors.Count > 0)
-            AddErrorList(validation.Errors);
+    //    if (validation.Errors.Count > 0)
+    //        AddErrorList(validation.Errors);
 
-        return _errors.Count == 0;
-    }
+    //    return _errors.Count == 0;
+    //}
 
-    public string ErrorsToString()
-    {
-        var builder = new StringBuilder();
+    //public string ErrorsToString()
+    //{
+    //    var builder = new StringBuilder();
 
-        foreach (var error in _errors)
-            builder.Append(" " + error);
+    //    foreach (var error in _errors)
+    //        builder.Append(" " + error);
 
-        return builder.ToString();
-    }
+    //    return builder.ToString();
+    //}
 }

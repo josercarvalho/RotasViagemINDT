@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotasViagem.Services", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotasViagem.Aplication", "src\RotasViagem.Aplication\RotasViagem.Aplication.csproj", "{9CDCF0F9-6104-4D1E-9AFE-D5B5FFDE078E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotaViagem.Tests", "src\RotaViagem.Tests\RotaViagem.Tests.csproj", "{778ECF83-F648-A1AC-9E16-A79A3E4A66F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotasViagem.Api", "src\RotasViagem.API\RotasViagem.Api.csproj", "{9906FC6C-9CB2-9D16-2FAF-5370858D4B1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,14 @@ Global
 		{9CDCF0F9-6104-4D1E-9AFE-D5B5FFDE078E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CDCF0F9-6104-4D1E-9AFE-D5B5FFDE078E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CDCF0F9-6104-4D1E-9AFE-D5B5FFDE078E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{778ECF83-F648-A1AC-9E16-A79A3E4A66F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{778ECF83-F648-A1AC-9E16-A79A3E4A66F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{778ECF83-F648-A1AC-9E16-A79A3E4A66F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{778ECF83-F648-A1AC-9E16-A79A3E4A66F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9906FC6C-9CB2-9D16-2FAF-5370858D4B1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9906FC6C-9CB2-9D16-2FAF-5370858D4B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9906FC6C-9CB2-9D16-2FAF-5370858D4B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9906FC6C-9CB2-9D16-2FAF-5370858D4B1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +56,8 @@ Global
 		{F8734922-448B-4349-BE72-74583581CD80} = {B868CE35-E929-4D90-B1CF-4C06A1F81695}
 		{3EF880D6-A4A7-4B4C-BD3A-059D7777326B} = {B868CE35-E929-4D90-B1CF-4C06A1F81695}
 		{9CDCF0F9-6104-4D1E-9AFE-D5B5FFDE078E} = {B868CE35-E929-4D90-B1CF-4C06A1F81695}
+		{778ECF83-F648-A1AC-9E16-A79A3E4A66F4} = {B868CE35-E929-4D90-B1CF-4C06A1F81695}
+		{9906FC6C-9CB2-9D16-2FAF-5370858D4B1C} = {B868CE35-E929-4D90-B1CF-4C06A1F81695}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0ED28BCC-38B1-4616-94C9-13F3DC111A8A}

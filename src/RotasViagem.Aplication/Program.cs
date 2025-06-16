@@ -1,4 +1,5 @@
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using RotasViagem.Aplication.Controllers;
 using RotasViagem.Domain.Entities;
@@ -6,9 +7,7 @@ using RotasViagem.Domain.Validators;
 using RotasViagem.Infra.Context;
 using RotasViagem.Infra.Interfaces;
 using RotasViagem.Infra.Repositories;
-using RotasViagem.Services.Interfaces;
 using RotasViagem.Services.Mappings;
-using RotasViagem.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,9 +39,10 @@ builder.Services.AddSwaggerGen(c =>
 
 #region Database
 
+builder.Services.AddDbContext<RotaDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddScoped<RotaDbContext>();
-
-
 builder.Services.AddScoped<IValidator<Rota>, RotaValidator>();
 
 builder.Services.AddCors(options =>
@@ -67,7 +67,6 @@ builder.Services.AddScoped<IRotaRepository, RotaRepository>();
 #region Services    
 
 builder.Services.AddAutoMapper(typeof(RotaProfile));
-builder.Services.AddScoped<IRotaService, RotaService>();
 
 #endregion
 

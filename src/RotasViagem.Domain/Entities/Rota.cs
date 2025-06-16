@@ -29,16 +29,16 @@ public class Rota : Base
         Origem = origem;
         Destino = destino;
         Valor = valor;
-        _errors = new List<string>();
+        //_errors = new List<string>();
 
-        Validate();
+        //Validate();
     }
 
-    public void SetOrigem(string origem) { Origem = origem; Validate(); }
+    public void SetOrigem(string origem) { Origem = origem; } 
 
-    public void SetDestino(string destino) { Destino = destino; Validate(); }
+    public void SetDestino(string destino) { Destino = destino; }
 
-    public bool Validate()
-            => base.Validate(new RotaValidator(), this);
+    //public bool Validate()
+    //        => base.Validate(new RotaValidator(), this);
 
 }
